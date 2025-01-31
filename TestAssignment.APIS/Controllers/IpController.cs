@@ -29,6 +29,11 @@ namespace TestAssignment.APIS.Controllers
             var client = httpClientFactory.CreateClient();
             var response = await client.GetAsync($"https://api.ipgeolocation.io/ipgeo?apiKey={key}&ip={ipAddress}&fields=country_name,country_code3");
 
+            if (!response.IsSuccessStatusCode)
+            {
+                return StatusCode((int)response.StatusCode, "Failed to retrieve IP data.");
+            }
+
             var result = await response.Content.ReadAsStringAsync();
             var jsonResponse = JsonConvert.DeserializeObject<ResponseDTO>(result);
 

@@ -27,7 +27,7 @@ namespace TestAssignment.APIS.Controllers
             {
                 return Ok("Country Blocked Successfully");
             }
-            return BadRequest();
+            return BadRequest("This Country Code Already Exist");
         }
 
         [HttpDelete("block/{countryCode}")]
